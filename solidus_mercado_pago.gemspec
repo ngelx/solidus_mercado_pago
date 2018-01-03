@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails',    '~> 4.1'
 
   s.add_development_dependency 'capybara-accessible'
+  s.add_development_dependency 'generator_spec'
 
   s.test_files = Dir['spec/**/*']
 end
