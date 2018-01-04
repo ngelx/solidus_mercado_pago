@@ -19,6 +19,19 @@ bundle exec rails g solidus_mercado_pago:install
 
 This will import assets and migrations
 
+Configuration
+-----
+*config/secrets.yml*
+
+```
+development:
+  secret_key_base: ...
+  mercadopago:
+    client_id: <client id from mercadopago>
+    client_secret: <client secret from mercadopago>
+    sandbox: true | false
+```
+
 Usage
 -----
 
