@@ -13,6 +13,7 @@ RSpec.configure do |config|
       add_group 'Libraries', 'lib'
 
       add_filter '.bundle'
+      add_filter 'lib/solidus_mercado_pago/version.rb'
     end
   end
 end
