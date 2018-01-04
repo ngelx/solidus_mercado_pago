@@ -1,5 +1,5 @@
 # rubocop:disable Style/RegexpLiteral
-# rubocop:disable Rspec/FilePath
+# rubocop:disable RSpec/FilePath
 
 require 'spec_helper'
 require 'generator_spec'
