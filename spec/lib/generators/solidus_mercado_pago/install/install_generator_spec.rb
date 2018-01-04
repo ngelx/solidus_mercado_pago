@@ -1,3 +1,6 @@
+# rubocop:disable Style/RegexpLiteral
+# rubocop:disable Rspec/FilePath
+
 require 'spec_helper'
 require 'generator_spec'
 require 'generators/solidus_mercado_pago/install/install_generator'

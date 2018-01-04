@@ -35,6 +35,9 @@ Rails/HttpPositionalArguments:
 RSpec/NestedGroups:
   Max: 4
 
+RSpec/MessageSpies:
+  Enabled: false
+
 StringLiterals:
   EnforcedStyle: single_quotes
 
