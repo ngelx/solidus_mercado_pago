@@ -44,8 +44,8 @@ StringLiterals:
 Style/Documentation:
   Enabled: false
 
-Style/DotPosition:
-  EnforcedStyle: leading
-
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: leading
