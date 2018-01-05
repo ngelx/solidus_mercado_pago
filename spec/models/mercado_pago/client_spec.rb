@@ -82,6 +82,8 @@ RSpec.describe MercadoPago::Client, type: :model do
 
   describe '#create_preferences' do
     context 'On success' do
+      subject(:create_preference) { client.create_preferences(preferences) }
+
       let(:preferences) { { foo: 'bar' } }
 
       before do
@@ -94,13 +96,11 @@ RSpec.describe MercadoPago::Client, type: :model do
       end
 
       it 'return value should not be nil' do
-        response = client.create_preferences(preferences)
-        expect(response).to be_truthy
+        expect(create_preference).to be_truthy
       end
 
       it '#redirect_url returns offsite checkout url' do
-        client.create_preferences(preferences)
-        expect(client.redirect_url).to be_present
+        create_preference
         expect(client.redirect_url).to eq('https://www.mercadopago.com/checkout/pay?pref_id=identificador_de_la_preferencia')
       end
     end
