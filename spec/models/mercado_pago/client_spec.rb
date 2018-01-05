@@ -91,7 +91,6 @@ RSpec.describe MercadoPago::Client, type: :model do
         allow(response).to receive(:code).and_return(200, 201)
         allow(response).to receive(:to_str).and_return(login_json_response, preferences_json_response)
         allow(RestClient).to receive(:post).exactly(2).times { response }
-
         client.authenticate
       end
 
@@ -99,9 +98,17 @@ RSpec.describe MercadoPago::Client, type: :model do
         expect(create_preference).to be_truthy
       end
 
-      it '#redirect_url returns offsite checkout url' do
-        create_preference
-        expect(client.redirect_url).to eq('https://www.mercadopago.com/checkout/pay?pref_id=identificador_de_la_preferencia')
+      describe '#redirect_url returns offsite checkout url' do
+        it 'sandobox false' do
+          allow(client).to receive(:sandbox).and_return(false)
+          create_preference
+          expect(client.redirect_url).to eq('https://www.mercadopago.com/checkout/pay?pref_id=identificador_de_la_preferencia')
+        end
+        it 'sandobox true' do
+          allow(client).to receive(:sandbox).and_return(true)
+          create_preference
+          expect(client.redirect_url).to eq('https://www.mercadopago.com/checkout/sandbox')
+        end
       end
     end
 
