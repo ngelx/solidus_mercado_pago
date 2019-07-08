@@ -21,18 +21,32 @@ bundle exec rails g solidus_mercado_pago:install
 
 This will import assets and migrations
 
-Configuration
+Basic Setup
 -----
-*config/secrets.yml*
 
-```
-development:
-  secret_key_base: ...
-  mercadopago:
-    client_id: <client id from mercadopago>
-    client_secret: <client secret from mercadopago>
-    sandbox: true | false
-```
+## Retrieve Mercado pago account details
+You'll need the following account details:
+
+- Client ID
+- Client secret
+- Sandbox (A boolean value to indicate if we're using the sandbox or not)
+
+These values can be obtained by logging in to your Mercado Pago account, going to `Credentials -> Basic checkout`
+
+## Create a new payment method
+
+Payment methods can accept preferences either directly entered in admin.
+
+1. Visit `/admin/payment_methods/new`
+2. Set `Mercado pago` as provider.
+3. Save to update the form
+4. Set your credentials into the corresponding fields
+
+By default, your preferences can be gained from your environment vars (`MERCADOPAGO_CLIENT_ID`, `MERCADOPAGO_CLIENT_SECRET`), except by `sandbox`; its default value is `true`.
+
+
+Other option is create the payment method from admin interface:
+
 
 Usage
 -----
