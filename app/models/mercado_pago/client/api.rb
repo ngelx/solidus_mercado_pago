@@ -30,7 +30,7 @@ class MercadoPago::Client
     end
 
     def sandbox
-      Rails.application.try(:secrets).try(:[], :mercadopago).try(:[], :sandbox)
+      @payment_method.preferred_sandbox
     end
 
     def get(url, request_options = {}, options = {})

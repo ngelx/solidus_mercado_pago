@@ -12,13 +12,10 @@ RSpec.describe Spree::PaymentMethod::MercadoPago do
     it { expect(payment_method.auto_capture?).to eq false }
 
     describe 'sandbox' do
-      it 'true' do
-        Rails.application.secrets.mercadopago = { sandbox: true }
+      let(:preferences) { { sandbox: true } }
+      let(:payment_method) { described_class.new(preferences: preferences) }
+      it 'stores sandbox value as model preference' do
         expect(payment_method.preferred_sandbox).to eq true
-      end
-      it 'false' do
-        Rails.application.secrets.mercadopago = { sandbox: false }
-        expect(payment_method.preferred_sandbox).to eq false
       end
     end
 
