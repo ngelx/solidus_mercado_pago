@@ -134,4 +134,36 @@ RSpec.describe MercadoPago::Client, type: :model do
       end
     end
   end
+
+  context 'payment method with preferences' do
+    let(:preferences) do
+      {
+        client_id: '6nVDZ8MsMS',
+        client_secret: 'o5ODEtNt6h',
+        sandbox: false
+      }
+    end
+
+    let(:payment_method) { Spree::PaymentMethod::MercadoPago.new(preferences: preferences) }
+
+    let(:mercado_pago) { described_class.new(payment_method) }
+
+    describe '#client_id' do
+      it 'comes from payment method' do
+        expect(mercado_pago.send(:client_id)).to eq payment_method.preferred_client_id
+      end
+    end
+
+    describe '#client_secret' do
+      it 'comes from payment method' do
+        expect(mercado_pago.send(:client_secret)).to eq payment_method.preferred_client_secret
+      end
+    end
+
+    describe '#sandbox' do
+      it 'comes from payment method' do
+        expect(mercado_pago.send(:sandbox)).to eq payment_method.preferred_sandbox
+      end
+    end
+  end
 end

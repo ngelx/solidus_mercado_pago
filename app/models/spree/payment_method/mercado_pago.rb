@@ -1,5 +1,10 @@
 module Spree
   class PaymentMethod::MercadoPago < PaymentMethod
+
+    preference :sandbox, :boolean, default: true
+    preference :client_id, :string, default: nil
+    preference :client_secret, :string, default: nil
+
     def payment_profiles_supported?
       false
     end
@@ -23,10 +28,6 @@ module Spree
 
     def auto_capture?
       false
-    end
-
-    def preferred_sandbox
-      Rails.application.try(:secrets).try(:[], :mercadopago).try(:[], :sandbox)
     end
 
     ## Admin options
