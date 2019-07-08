@@ -21,18 +21,42 @@ bundle exec rails g solidus_mercado_pago:install
 
 This will import assets and migrations
 
-Configuration
+Basi Setup
 -----
-*config/secrets.yml*
 
+## Retrieve Mercado pago account details
+You'll need the following account details:
+
+- Client ID
+- Client secret
+- Sandbox
+
+These values can be obtained by logging in to your Mercado Pago account, going to `Credentials -> Basic checkout`
+
+## Create a new payment method
+
+Payment methods can accept preferences either directly entered in admin, or from static source in code. For most projects we recommend using a static source, so that sensitive account credentials are not stored in the database.
+
+1. Set static preferences in an initializer
+```ruby
+# config/initializers/spree.rb
+Spree::Config.configure do |config|
+  config.static_model_preferences.add(
+    Spree::PaymentMethod::MercadoPago,
+    'mercado_pago_credentials', {
+      sandbox: Rails.env.production? ? true : false,
+      client_id: ENV['MERCADOPAGO_CLIENT_ID'],
+      client_secret: ENV['MERCADOPAGO_CLIENT_SECRET']
+    }
+  )
+end
 ```
-development:
-  secret_key_base: ...
-  mercadopago:
-    client_id: <client id from mercadopago>
-    client_secret: <client secret from mercadopago>
-    sandbox: true | false
-```
+Other option is create the payment method from admin interface:
+
+1. Visit `/admin/payment_methods/new`
+2. Set as provider the `Mercado pago` option
+3. Save to refresh the form
+4. Set your credentials into the corresponding fields
 
 Usage
 -----
